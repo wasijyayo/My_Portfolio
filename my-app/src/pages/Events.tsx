@@ -95,7 +95,7 @@ export function Events() {
   const [notionData, setNotionData] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch("https//localhost:3000/api/events");
+      const res = await fetch("/api/events");
       const data = await res.json();
       console.log(data);
       setNotionData(data);

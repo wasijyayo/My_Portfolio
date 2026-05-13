@@ -1,69 +1,47 @@
-import { Briefcase, GraduationCap, Award } from "lucide-react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card";
+import { GraduationCap } from "lucide-react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../components/ui/card";
 import { Badge } from "../components/ui/badge";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 
 const timelineItems = [
   {
-    year: "2016 - 2020",
-    type: "education",
-    title: "情報工学学士",
-    company: "○○大学 情報工学部",
-    location: "東京",
-    description: "コンピュータサイエンスの基礎、アルゴリズム、データ構造、ソフトウェア工学を学習。",
-    achievements: [
-      "卒業研究: 機械学習を用いたWebアプリケーションのパフォーマンス最適化",
-      "GPA: 3.8/4.0",
-      "学部長賞受賞",
-    ],
-    technologies: [],
+    year: "2022",
+    title: "プログラミング開始",
+    organization: "高校2年生",
+    description:
+      "Pythonで双六やブロック崩しを作り始める。ライブラリや外部ツールは何も知らない状態で、純粋なコードを書いていた時期。WEB系に触りだしたのは短大に入ってから。",
+    technologies: ["Python"],
   },
   {
-    year: "2021 - 2023",
-    type: "work",
-    title: "フロントエンド開発者",
-    company: "Creative Web Solutions",
-    location: "東京",
-    description: "様々なクライアントプロジェクトでフロントエンド開発を担当。レスポンシブデザインとアクセシビリティを重視したWebアプリケーションを構築。",
-    achievements: [
-      "10以上のクライアントプロジェクトを成功裏に貢献",
-      "社内のコーディング規約とベストプラクティスを策定",
-      "新入社員向けのReact研修プログラムを作成",
-    ],
-    technologies: ["React", "Vue.js", "JavaScript", "CSS", "Node.js"],
+    year: "2024",
+    title: "短大入学・WEB系へ転向",
+    organization: "短大1年生",
+    description:
+      "入学当初はUnityでゲーム制作。初ハッカソンでトラウマを植え付けられ、そこからWEB系の道へ逃げる。",
+    technologies: ["Unity", "C#", "HTML", "CSS", "JavaScript"],
   },
   {
-    year: "2023 - 現在",
-    type: "work",
-    title: "シニアフロントエンド開発者",
-    company: "Tech Innovations株式会社",
-    location: "東京",
-    description: "大規模なWebアプリケーションの設計と開発をリード。React、TypeScript、Next.jsを使用したプロジェクトを担当。",
-    achievements: [
-      "新規プロダクトの技術選定とアーキテクチャ設計を主導",
-      "ページ読み込み速度を40%改善",
-      "チームメンバー5名の技術メンタリング",
-    ],
-    technologies: ["React", "TypeScript", "Next.js", "GraphQL", "AWS"],
-  },
-];
-
-const certifications = [
-  {
-    title: "AWS Certified Solutions Architect - Associate",
-    issuer: "Amazon Web Services",
-    date: "2024年6月",
+    year: "2025",
+    title: "ハッカソン本格参戦",
+    organization: "短大2年生",
+    description:
+      "2年になりハッカソンへの参加頻度が大幅に増える。JavaScriptを武器に複数のハッカソンへ出場。毎回惜しいところで受賞を逃す。編入試験で大変だった一年",
+    technologies: ["JavaScript", "React", "Node.js"],
   },
   {
-    title: "Google Cloud Professional Cloud Architect",
-    issuer: "Google Cloud",
-    date: "2023年9月",
-  },
-  {
-    title: "Professional Scrum Master I",
-    issuer: "Scrum.org",
-    date: "2022年11月",
+    year: "2026",
+    title: "九州産業大学 3年次編入",
+    organization: "九州産業大学 情報科学科",
+    description:
+      "九州産業大学情報科学科に3年次編入。就職に向けて開発スキルを上げるためイベントに沢山参加したい。",
+    technologies: ["React", "TypeScript", "Next.js"],
   },
 ];
 
@@ -83,104 +61,71 @@ export function Career() {
             <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-slate-300"></div>
 
             <div className="space-y-8">
-              {timelineItems.map((item, index) => {
-                const isWork = item.type === "work";
-                const Icon = isWork ? Briefcase : GraduationCap;
-                const iconColor = isWork ? "bg-blue-600" : "bg-green-600";
-                const borderColor = isWork ? "border-blue-500" : "border-green-500";
-
-                return (
-                  <div key={index} className="relative pl-20">
-                    <div
-                      className={`absolute left-4 top-6 w-8 h-8 rounded-full ${iconColor} flex items-center justify-center z-10`}
-                    >
-                      <Icon className="w-4 h-4 text-white" />
-                    </div>
-
-                    <div className="absolute left-0 top-0 text-sm font-semibold text-slate-700 bg-slate-100 px-3 py-1 rounded-full">
-                      {item.year}
-                    </div>
-
-                    <Card className={`bg-white border-l-4 ${borderColor} mt-8`}>
-                      <CardHeader>
-                        <CardTitle className="text-slate-900">{item.title}</CardTitle>
-                        <div className={`text-lg ${isWork ? "text-blue-600" : "text-green-600"} mb-2`}>
-                          {item.company}
-                        </div>
-                        <div className="text-sm text-slate-600">{item.location}</div>
-                        <CardDescription className="mt-4">{item.description}</CardDescription>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="mb-4">
-                          <h4 className="text-sm font-semibold text-slate-700 mb-2">
-                            {isWork ? "主な実績" : "主な成果"}
-                          </h4>
-                          <ul className="list-disc list-inside space-y-1 text-sm text-slate-600">
-                            {item.achievements.map((achievement, achIndex) => (
-                              <li key={achIndex}>{achievement}</li>
-                            ))}
-                          </ul>
-                        </div>
-                        {item.technologies.length > 0 && (
-                          <div>
-                            <h4 className="text-sm font-semibold text-slate-700 mb-2">使用技術</h4>
-                            <div className="flex flex-wrap gap-2">
-                              {item.technologies.map((tech, techIndex) => (
-                                <Badge key={techIndex} variant="secondary">
-                                  {tech}
-                                </Badge>
-                              ))}
-                            </div>
-                          </div>
-                        )}
-                      </CardContent>
-                    </Card>
+              {timelineItems.map((item, index) => (
+                <div key={index} className="relative pl-20">
+                  <div className="absolute left-4 top-6 w-8 h-8 rounded-full bg-green-600 flex items-center justify-center z-10">
+                    <GraduationCap className="w-4 h-4 text-white" />
                   </div>
-                );
-              })}
-            </div>
-          </div>
 
-          {/* 資格 */}
-          <div className="mb-12">
-            <div className="flex items-center gap-2 mb-6">
-              <Award className="w-6 h-6 text-purple-600" />
-              <h2 className="text-slate-900">資格</h2>
-            </div>
+                  <div className="absolute left-0 top-0 text-sm font-semibold text-slate-700 bg-slate-100 px-3 py-1 rounded-full">
+                    {item.year}
+                  </div>
 
-            <div className="grid md:grid-cols-2 gap-6">
-              {certifications.map((cert, index) => (
-                <Card key={index} className="bg-white hover:shadow-lg transition-shadow">
-                  <CardHeader>
-                    <CardTitle className="text-slate-900 text-lg">{cert.title}</CardTitle>
-                    <CardDescription>
-                      {cert.issuer} • {cert.date}
-                    </CardDescription>
-                  </CardHeader>
-                </Card>
+                  <Card className="bg-white border-l-4 border-green-500 mt-8">
+                    <CardHeader>
+                      <CardTitle className="text-slate-900">
+                        {item.title}
+                      </CardTitle>
+                      <div className="text-lg text-green-600 mb-2">
+                        {item.organization}
+                      </div>
+                      <CardDescription className="mt-4">
+                        {item.description}
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      {item.technologies.length > 0 && (
+                        <div>
+                          <h4 className="text-sm font-semibold text-slate-700 mb-2">
+                            使用技術
+                          </h4>
+                          <div className="flex flex-wrap gap-2">
+                            {item.technologies.map((tech, techIndex) => (
+                              <Badge key={techIndex} variant="secondary">
+                                {tech}
+                              </Badge>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </CardContent>
+                  </Card>
+                </div>
               ))}
             </div>
           </div>
 
           {/* キャリアサマリー */}
           <div className="p-6 bg-white rounded-lg shadow-sm">
-            <h3 className="text-center text-slate-900 mb-6">キャリアサマリー</h3>
-            <div className="grid md:grid-cols-4 gap-6 text-center">
+            <h3 className="text-center text-slate-900 mb-6">
+              キャリアサマリー
+            </h3>
+            <div className="grid md:grid-cols-3 gap-6 text-center">
               <div>
-                <div className="text-3xl font-bold text-blue-600 mb-1">5+</div>
-                <div className="text-sm text-slate-600">年の経験</div>
+                <div className="text-3xl font-bold text-blue-600 mb-1">
+                  4年+
+                </div>
+                <div className="text-sm text-slate-600">プログラミング歴</div>
               </div>
               <div>
-                <div className="text-3xl font-bold text-green-600 mb-1">3</div>
-                <div className="text-sm text-slate-600">企業での実務</div>
+                <div className="text-3xl font-bold text-green-600 mb-1">5+</div>
+                <div className="text-sm text-slate-600">ハッカソン参加回数</div>
               </div>
               <div>
-                <div className="text-3xl font-bold text-purple-600 mb-1">50+</div>
-                <div className="text-sm text-slate-600">完成プロジェクト</div>
-              </div>
-              <div>
-                <div className="text-3xl font-bold text-orange-600 mb-1">3</div>
-                <div className="text-sm text-slate-600">取得資格</div>
+                <div className="text-3xl font-bold text-purple-600 mb-1">
+                  11+
+                </div>
+                <div className="text-sm text-slate-600">成果物数</div>
               </div>
             </div>
           </div>

@@ -1,4 +1,10 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../components/ui/card";
 import { Badge } from "../components/ui/badge";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
@@ -6,41 +12,34 @@ import { Header } from "../components/Header";
 const techCategories = [
   {
     category: "フロントエンド",
-    description: "ユーザーインターフェースとクライアントサイド開発",
     color: "border-blue-500",
     technologies: [
-      { name: "React", level: "エキスパート" },
-      { name: "TypeScript", level: "エキスパート" },
-      { name: "Next.js", level: "上級" },
-      { name: "Vue.js", level: "中級" },
-      { name: "Tailwind CSS", level: "エキスパート" },
-      { name: "HTML5/CSS3", level: "エキスパート" },
+      { name: "React", level: "中級" },
+      { name: "TypeScript", level: "中級" },
+      { name: "Tailwind CSS", level: "中級" },
+      { name: "HTML5/CSS3", level: "中級" },
+      { name: "Next.js", level: "初級" },
     ],
   },
   {
     category: "バックエンド",
-    description: "サーバーサイドとAPI開発",
     color: "border-green-500",
     technologies: [
-      { name: "Node.js", level: "上級" },
-      { name: "Express.js", level: "上級" },
+      { name: "Node.js", level: "中級" },
+      { name: "Express.js", level: "中級" },
       { name: "Python", level: "中級" },
-      { name: "FastAPI", level: "中級" },
-      { name: "GraphQL", level: "上級" },
-      { name: "REST API", level: "エキスパート" },
+      { name: "FastAPI", level: "初級" },
+      { name: "Firebase Functions", level: "初級" },
     ],
   },
   {
     category: "データベース",
-    description: "データストレージとクエリ",
     color: "border-purple-500",
     technologies: [
-      { name: "PostgreSQL", level: "上級" },
-      { name: "MongoDB", level: "上級" },
-      { name: "Redis", level: "中級" },
+      { name: "PostgreSQL", level: "中級" },
+      { name: "Firestore", level: "中級" },
       { name: "MySQL", level: "中級" },
-      { name: "Supabase", level: "上級" },
-      { name: "Firebase", level: "上級" },
+      { name: "Supabase", level: "中級" },
     ],
   },
   {
@@ -48,24 +47,31 @@ const techCategories = [
     description: "インフラストラクチャとデプロイメント",
     color: "border-orange-500",
     technologies: [
-      { name: "AWS", level: "中級" },
-      { name: "Docker", level: "上級" },
-      { name: "Vercel", level: "エキスパート" },
-      { name: "CI/CD", level: "上級" },
+      { name: "AWS", level: "初級" },
+      { name: "Vercel", level: "中級" },
+      { name: "Cloudflare", level: "上級" },
       { name: "GitHub Actions", level: "上級" },
     ],
   },
   {
+    category: "言語",
+    color: "border-orange-500",
+    technologies: [
+      { name: "C", level: "初級" },
+      { name: "C#", level: "中級" },
+      { name: "Python", level: "中級" },
+      { name: "JavaScript", level: "中級" },
+      { name: "TypeScript", level: "中級" },
+    ],
+  },
+  {
     category: "ツール & その他",
-    description: "開発効率化とバージョン管理",
     color: "border-slate-500",
     technologies: [
-      { name: "Git", level: "エキスパート" },
-      { name: "GitHub", level: "エキスパート" },
-      { name: "VS Code", level: "エキスパート" },
-      { name: "Figma", level: "上級" },
-      { name: "Postman", level: "上級" },
-      { name: "Vite", level: "上級" },
+      { name: "VS Code", level: "中級" },
+      { name: "Figma", level: "初級" },
+      { name: "Vite", level: "初級" },
+      { name: "Notion", level: "初級" },
     ],
   },
 ];
@@ -96,9 +102,14 @@ export function TechStack() {
 
           <div className="space-y-8">
             {techCategories.map((category, index) => (
-              <Card key={index} className={`border-l-4 ${category.color} bg-white`}>
+              <Card
+                key={index}
+                className={`border-l-4 ${category.color} bg-white`}
+              >
                 <CardHeader>
-                  <CardTitle className="text-slate-900">{category.category}</CardTitle>
+                  <CardTitle className="text-slate-900">
+                    {category.category}
+                  </CardTitle>
                   <CardDescription>{category.description}</CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -109,7 +120,10 @@ export function TechStack() {
                         className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors"
                       >
                         <span className="text-slate-900">{tech.name}</span>
-                        <Badge variant="outline" className={`ml-2 ${getLevelColor(tech.level)}`}>
+                        <Badge
+                          variant="outline"
+                          className={`ml-2 ${getLevelColor(tech.level)}`}
+                        >
                           {tech.level}
                         </Badge>
                       </div>
@@ -118,24 +132,6 @@ export function TechStack() {
                 </CardContent>
               </Card>
             ))}
-          </div>
-
-          <div className="mt-12 p-6 bg-white rounded-lg shadow-sm">
-            <h3 className="mb-4 text-center text-slate-900">スキルレベルについて</h3>
-            <div className="flex flex-wrap justify-center gap-4">
-              {["エキスパート", "上級", "中級"].map((level) => (
-                <div key={level} className="flex items-center gap-2">
-                  <Badge variant="outline" className={getLevelColor(level)}>
-                    {level}
-                  </Badge>
-                  <span className="text-sm text-slate-600">
-                    {level === "エキスパート" && "実務経験3年以上"}
-                    {level === "上級" && "実務経験1-3年"}
-                    {level === "中級" && "実務経験1年未満"}
-                  </span>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </section>

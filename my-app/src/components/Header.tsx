@@ -7,8 +7,7 @@ const navItems = [
   { name: "ホーム", path: "/" },
   { name: "プロジェクト", path: "/projects" },
   { name: "技術スタック", path: "/tech-stack" },
-  { name: "イベント", path: "/events" },
-  { name: "経歴", path: "/career" },
+{ name: "経歴", path: "/career" },
 ];
 
 export function Header() {

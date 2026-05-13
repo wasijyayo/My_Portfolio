@@ -11,7 +11,7 @@ const techHighlights = [
     description: "モダンなUIフレームワークとライブラリ",
     color: "text-blue-600",
     bgColor: "bg-blue-100",
-    technologies: ["React", "TypeScript", "Next.js", "Tailwind CSS", "Vue.js"],
+    technologies: ["React", "TypeScript", "Tailwind CSS", "HTML5/CSS3", "Next.js"],
   },
   {
     icon: Database,
@@ -19,7 +19,7 @@ const techHighlights = [
     description: "サーバーサイドとデータストレージ",
     color: "text-green-600",
     bgColor: "bg-green-100",
-    technologies: ["Node.js", "PostgreSQL", "MongoDB", "GraphQL", "Express"],
+    technologies: ["Node.js", "Express.js", "Python", "PostgreSQL", "Supabase"],
   },
   {
     icon: Cloud,
@@ -27,15 +27,15 @@ const techHighlights = [
     description: "インフラとデプロイメント",
     color: "text-orange-600",
     bgColor: "bg-orange-100",
-    technologies: ["AWS", "Docker", "Vercel", "CI/CD", "GitHub Actions"],
+    technologies: ["AWS", "Vercel", "Cloudflare", "GitHub Actions"],
   },
   {
     icon: Palette,
-    category: "デザイン & ツール",
-    description: "UI/UXデザインと開発ツール",
+    category: "言語 & ツール",
+    description: "プログラミング言語と開発ツール",
     color: "text-purple-600",
     bgColor: "bg-purple-100",
-    technologies: ["Figma", "Git", "VS Code", "Adobe XD", "Postman"],
+    technologies: ["C#", "Python", "JavaScript", "VS Code", "Figma"],
   },
 ];
 
