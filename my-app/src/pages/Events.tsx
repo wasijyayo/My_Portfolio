@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Calendar, MapPin, Users } from "lucide-react";
 import {
   Card,
@@ -92,13 +92,11 @@ const getTypeColor = (type: string) => {
 };
 
 export function Events() {
-  const [notionData, setNotionData] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetch("/api/events");
       const data = await res.json();
       console.log(data);
-      setNotionData(data);
     };
     fetchData();
   }, []);
