@@ -17,7 +17,7 @@ export function AllProjects() {
   const [projects, setProjects] = useState<any[]>([]);
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch("http://localhost:3002/api/events");
+      const res = await fetch("/api/events");
       const data = await res.json();
       const formatted = data.map((item: any) => ({
         title: item.properties.タイトル.title[0]?.plain_text,

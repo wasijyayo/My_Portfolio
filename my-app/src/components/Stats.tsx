@@ -7,7 +7,7 @@ export function Stats() {
 
   useEffect(() => {
     const fetchCount = async () => {
-      const res = await fetch("http://localhost:3002/api/events");
+      const res = await fetch("/api/events");
       const data = await res.json();
       setProjectCount(data.length);
     };
