@@ -1,5 +1,6 @@
+import { Github } from "lucide-react";
 import wasiIcon from "../assets/wasi.jpg";
-import { Button } from "./ui/button";
+import { buttonClass } from "./ui/buttonClass";
 
 export function Hero() {
   const scrollToSection = (id: string) => {
@@ -8,35 +9,43 @@ export function Hero() {
   };
 
   return (
-    <section className="py-16 bg-gradient-to-br from-slate-50 to-slate-100 flex justify-center px-4">
-      <div className="bg-white rounded-2xl shadow-md p-10 max-w-3xl w-full">
-        <div className="flex flex-col md:flex-row items-center gap-10">
+    <section className="mx-auto flex w-full max-w-[1120px] flex-wrap items-center gap-14 px-6 pt-20 pb-20 md:pt-24">
+      <div className="flex flex-[1_1_300px] justify-center">
+        <div className="relative w-[260px] sm:w-[300px]">
           <img
             src={wasiIcon}
-            alt="プロフィール画像"
-            className="w-36 h-36 object-cover rounded-full flex-shrink-0 shadow-md"
+            alt="小阪佳輝のプロフィール画像"
+            className="block aspect-square w-full rounded-[32px] border-[3px] border-ink object-cover shadow-hard-xl"
           />
-          <div className="flex flex-col items-center md:items-start gap-3 text-center md:text-left">
-            <h1 className="text-3xl font-bold text-slate-900 m-0">
-              小阪 佳輝 | わしじゃよ
-            </h1>
-            <p className="text-blue-500 font-medium text-lg">
-              Software Engineer
-            </p>
-            <p className="text-slate-600 text-sm">
-              九州産業大学情報科学科在籍（3年生）
-            </p>
-            <p className="text-slate-600 text-sm">バックエンドに現在興味あり</p>
-            <div className="flex gap-3 mt-2">
-              <Button
-                onClick={() => scrollToSection("projects")}
-                className="bg-slate-900 hover:bg-slate-700 text-white"
-              >
-                作品を見る →
-              </Button>
-              <Button variant="outline">GitHub</Button>
-            </div>
+          <div className="absolute -top-7 -right-4 rotate-6 rounded-[20px] border-[3px] border-ink bg-white px-4 py-2.5 font-display text-xl font-extrabold sm:-right-6 sm:text-[22px]">
+            わしじゃよ！
           </div>
+        </div>
+      </div>
+
+      <div className="flex min-w-0 flex-[999_1_460px] flex-col gap-5">
+        <span className="self-start rounded-full border-2 border-ink bg-white px-3.5 py-1.5 font-display text-sm font-bold">
+          Software Engineer
+        </span>
+        <h1 className="text-5xl leading-tight sm:text-[64px]">小阪 佳輝</h1>
+        <p className="text-lg leading-[1.9]">
+          九州産業大学 情報科学科 3年。
+          <br />
+          ハッカソンに出まくりながら、いまはバックエンドに夢中です。
+        </p>
+        <div className="mt-2 flex flex-wrap gap-3.5">
+          <button onClick={() => scrollToSection("projects")} className={buttonClass("default", "lg")}>
+            作品を見る →
+          </button>
+          <a
+            href="https://github.com/wasijyayo"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={buttonClass("outline", "lg")}
+          >
+            <Github className="h-[18px] w-[18px]" aria-hidden="true" />
+            GitHub
+          </a>
         </div>
       </div>
     </section>

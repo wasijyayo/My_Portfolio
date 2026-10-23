@@ -1,15 +1,9 @@
-import { Heart } from "lucide-react";
-
 export function Footer() {
   return (
-    <footer className="py-8 bg-slate-900 text-slate-300">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm flex items-center gap-2">
-            Made with <Heart className="w-4 h-4 text-red-500 fill-red-500" /> by 小阪佳輝
-          </p>
-          <p className="text-sm">© 2026 All rights reserved</p>
-        </div>
+    <footer className="mt-auto border-t-2 border-ink bg-white">
+      <div className="mx-auto flex max-w-[1120px] flex-wrap justify-between gap-3 px-6 py-7 text-sm font-bold">
+        <p>made by わしじゃよ（小阪佳輝）</p>
+        <p>© 2026 All rights reserved</p>
       </div>
     </footer>
   );
