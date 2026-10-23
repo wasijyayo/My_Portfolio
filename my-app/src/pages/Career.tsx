@@ -1,12 +1,3 @@
-import { GraduationCap } from "lucide-react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "../components/ui/card";
-import { Badge } from "../components/ui/badge";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 
@@ -45,91 +36,73 @@ const timelineItems = [
   },
 ];
 
+const summary = [
+  { value: "4年+", label: "プログラミング歴" },
+  { value: "5+", label: "ハッカソン参加" },
+  { value: "11+", label: "つくったもの" },
+];
+
 export function Career() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex min-h-screen flex-col">
       <Header />
-      <section className="flex-1 py-20 bg-gradient-to-br from-slate-50 to-slate-100">
-        <div className="max-w-4xl mx-auto px-6">
-          <h1 className="text-center mb-4 text-slate-900">経歴</h1>
-          <p className="text-center text-slate-600 mb-12 max-w-2xl mx-auto">
-            これまでの職歴と学歴をタイムライン形式でご紹介します
+      <section className="mx-auto w-full max-w-[880px] flex-1 px-6 pt-18 pb-28">
+        <div className="mb-10 flex flex-col gap-3">
+          <h1 className="text-4xl leading-tight sm:text-[52px]">わしの歩み</h1>
+          <p className="text-[17px] leading-[1.8]">
+            高校でPythonを書きはじめてから、いまに至るまで。
           </p>
-
-          {/* タイムライン */}
-          <div className="mb-12 relative">
-            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-slate-300"></div>
-
-            <div className="space-y-8">
-              {timelineItems.map((item, index) => (
-                <div key={index} className="relative pl-20">
-                  <div className="absolute left-4 top-6 w-8 h-8 rounded-full bg-green-600 flex items-center justify-center z-10">
-                    <GraduationCap className="w-4 h-4 text-white" />
-                  </div>
-
-                  <div className="absolute left-0 top-0 text-sm font-semibold text-slate-700 bg-slate-100 px-3 py-1 rounded-full">
-                    {item.year}
-                  </div>
-
-                  <Card className="bg-white border-l-4 border-green-500 mt-8">
-                    <CardHeader>
-                      <CardTitle className="text-slate-900">
-                        {item.title}
-                      </CardTitle>
-                      <div className="text-lg text-green-600 mb-2">
-                        {item.organization}
-                      </div>
-                      <CardDescription className="mt-4">
-                        {item.description}
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      {item.technologies.length > 0 && (
-                        <div>
-                          <h4 className="text-sm font-semibold text-slate-700 mb-2">
-                            使用技術
-                          </h4>
-                          <div className="flex flex-wrap gap-2">
-                            {item.technologies.map((tech, techIndex) => (
-                              <Badge key={techIndex} variant="secondary">
-                                {tech}
-                              </Badge>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-                    </CardContent>
-                  </Card>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* キャリアサマリー */}
-          <div className="p-6 bg-white rounded-lg shadow-sm">
-            <h3 className="text-center text-slate-900 mb-6">
-              キャリアサマリー
-            </h3>
-            <div className="grid md:grid-cols-3 gap-6 text-center">
-              <div>
-                <div className="text-3xl font-bold text-blue-600 mb-1">
-                  4年+
-                </div>
-                <div className="text-sm text-slate-600">プログラミング歴</div>
-              </div>
-              <div>
-                <div className="text-3xl font-bold text-green-600 mb-1">5+</div>
-                <div className="text-sm text-slate-600">ハッカソン参加回数</div>
-              </div>
-              <div>
-                <div className="text-3xl font-bold text-purple-600 mb-1">
-                  11+
-                </div>
-                <div className="text-sm text-slate-600">成果物数</div>
-              </div>
-            </div>
-          </div>
         </div>
+
+        {/* キャリアサマリー */}
+        <div className="mb-18 grid gap-4 sm:grid-cols-3">
+          {summary.map((item) => (
+            <div
+              key={item.label}
+              className="flex flex-col gap-1 rounded-[20px] border-2 border-ink bg-white p-5.5 shadow-hard"
+            >
+              <span className="font-display text-[40px] leading-tight font-extrabold">
+                {item.value}
+              </span>
+              <span className="text-sm font-bold">{item.label}</span>
+            </div>
+          ))}
+        </div>
+
+        {/* タイムライン */}
+        <ol className="flex flex-col gap-10">
+          {timelineItems.map((item, index) => {
+            const isLatest = index === timelineItems.length - 1;
+            return (
+              <li key={item.year} className="flex flex-wrap items-start gap-5">
+                <div
+                  className={`flex h-24 w-24 flex-none items-center justify-center rounded-full border-[3px] border-ink font-display text-[22px] font-extrabold shadow-hard ${
+                    isLatest ? "bg-accent" : "bg-white"
+                  }`}
+                >
+                  {item.year}
+                </div>
+                <div className="flex min-w-0 flex-[999_1_320px] flex-col gap-3 rounded-[20px] border-2 border-ink bg-white p-6 shadow-hard-lg">
+                  <span className="self-start rounded-full border-2 border-ink px-3 py-1 text-[13px] font-bold">
+                    {item.organization}
+                  </span>
+                  <h2 className="text-2xl">{item.title}</h2>
+                  <p className="text-[15px] leading-[1.9]">{item.description}</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {item.technologies.map((tech) => (
+                      <span
+                        key={tech}
+                        className="rounded-full border-2 border-ink bg-cream px-2.5 py-0.5 text-xs font-bold"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </li>
+            );
+          })}
+        </ol>
       </section>
       <Footer />
     </div>
