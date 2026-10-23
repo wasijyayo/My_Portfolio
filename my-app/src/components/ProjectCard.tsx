@@ -3,6 +3,7 @@ import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { buttonClass } from "./ui/buttonClass";
 
 export interface Project {
+  id: string;
   title: string;
   date?: string;
   description: string;

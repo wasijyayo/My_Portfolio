@@ -15,6 +15,7 @@ export function AllProjects() {
       const res = await fetch("/api/events");
       const data = await res.json();
       const formatted = data.map((item: any) => ({
+        id: item.id,
         title: item.properties.タイトル.title[0]?.plain_text,
         date: item.properties.日付.date?.start,
         description:
@@ -73,8 +74,8 @@ export function AllProjects() {
         )}
 
         <div className="grid gap-7 md:grid-cols-2 lg:grid-cols-3">
-          {visible.map((project, index) => (
-            <ProjectCard key={index} project={project} />
+          {visible.map((project) => (
+            <ProjectCard key={project.id} project={project} />
           ))}
         </div>
       </section>

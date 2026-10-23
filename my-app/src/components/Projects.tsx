@@ -12,6 +12,7 @@ export function Projects() {
       const res = await fetch("/api/events");
       const data = await res.json();
       const formatted = data.slice(0, 3).map((item: any) => ({
+        id: item.id,
         title: item.properties.タイトル.title[0]?.plain_text,
         description: item.properties.プロジェクトについて.rich_text[0]?.plain_text,
         tags: item.properties.タグ.multi_select.map((tag: any) => tag.name),
@@ -29,8 +30,8 @@ export function Projects() {
       <h2 className="mb-9 text-4xl sm:text-[40px]">最近つくったもの</h2>
 
       <div className="grid gap-7 md:grid-cols-2 lg:grid-cols-3">
-        {projects.map((project, index) => (
-          <ProjectCard key={index} project={project} />
+        {projects.map((project) => (
+          <ProjectCard key={project.id} project={project} />
         ))}
       </div>
 
