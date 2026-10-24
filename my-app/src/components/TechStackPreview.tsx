@@ -23,7 +23,8 @@ export function TechStackPreview() {
   return (
     <section className="bg-ink text-cream">
       <div className="mx-auto max-w-[1120px] px-6 py-22">
-        <h2 className="mb-9 text-4xl sm:text-[40px]">技術スタック</h2>
+        <h2 className="mb-3 text-4xl sm:text-[40px]">技術スタック</h2>
+        <p className="mb-9">主に使用している技術とツールをご紹介します</p>
 
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {techHighlights.map((tech) => (
@@ -50,7 +51,7 @@ export function TechStackPreview() {
           to="/tech-stack"
           className="mt-7 inline-block py-3 font-display font-extrabold text-accent hover:underline"
         >
-          ぜんぶ見る →
+          すべての技術スタックを見る →
         </Link>
       </div>
     </section>

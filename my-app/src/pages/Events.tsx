@@ -7,7 +7,6 @@ import {
   CardTitle,
 } from "../components/ui/card";
 import { Badge } from "../components/ui/badge";
-import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 
 const events = [
@@ -181,7 +180,6 @@ export function Events() {
           </div>
         </div>
       </section>
-      <Footer />
     </div>
   );
 }

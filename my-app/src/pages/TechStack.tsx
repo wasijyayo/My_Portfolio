@@ -1,4 +1,3 @@
-import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 
 type Level = "初級" | "中級" | "上級";
@@ -88,9 +87,9 @@ export function TechStack() {
       <section className="mx-auto w-full max-w-[1120px] flex-1 px-6 pt-18 pb-28">
         <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
           <div className="flex flex-col gap-3">
-            <h1 className="text-4xl leading-tight sm:text-[52px]">さわった技術</h1>
+            <h1 className="text-4xl leading-tight sm:text-[52px]">技術スタック</h1>
             <p className="text-[17px] leading-[1.8]">
-              カテゴリーごとに、いまの手ごたえを3段階で。
+              これまでに習得した技術とスキルレベルをカテゴリー別にご紹介します
             </p>
           </div>
           <div className="flex flex-wrap gap-4 rounded-[14px] border-2 border-ink bg-white px-4.5 py-3 text-[13px] font-bold">
@@ -134,7 +133,6 @@ export function TechStack() {
           ))}
         </div>
       </section>
-      <Footer />
     </div>
   );
 }

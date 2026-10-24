@@ -61,7 +61,7 @@ export function ProjectCard({ project }: { project: Project }) {
               className={`${buttonClass("default", "sm")} shadow-none`}
             >
               <ExternalLink className="h-4 w-4" aria-hidden="true" />
-              記事を読む
+              記事
             </a>
           )}
         </div>

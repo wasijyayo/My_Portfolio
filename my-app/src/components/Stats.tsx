@@ -15,18 +15,18 @@ export function Stats() {
 
   const stats = [
     {
-      title: "つくったもの",
+      title: "プロジェクト数",
       value: projectCount !== null ? `${projectCount}` : "...",
       link: "/projects",
     },
     {
-      title: "開発歴",
+      title: "開発期間",
       value: "4",
       unit: "年",
       link: "/career",
     },
     {
-      title: "さわった技術",
+      title: "技術スタック",
       value: "22+",
       link: "/tech-stack",
     },
@@ -34,7 +34,7 @@ export function Stats() {
 
   return (
     <section id="stats" className="mx-auto w-full max-w-[1120px] px-6 pb-24">
-      <h2 className="sr-only">実績</h2>
+      <h2 className="mb-9 text-4xl sm:text-[40px]">実績</h2>
       <div className="grid gap-5 sm:grid-cols-3">
         {stats.map((stat) => (
           <Link
