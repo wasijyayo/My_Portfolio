@@ -1,18 +1,10 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "../components/ui/card";
-import { Badge } from "../components/ui/badge";
-import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 
-const techCategories = [
+type Level = "初級" | "中級" | "上級";
+
+const techCategories: { category: string; technologies: { name: string; level: Level }[] }[] = [
   {
     category: "フロントエンド",
-    color: "border-blue-500",
     technologies: [
       { name: "React", level: "中級" },
       { name: "TypeScript", level: "中級" },
@@ -23,7 +15,6 @@ const techCategories = [
   },
   {
     category: "バックエンド",
-    color: "border-green-500",
     technologies: [
       { name: "Node.js", level: "中級" },
       { name: "Express.js", level: "中級" },
@@ -34,7 +25,6 @@ const techCategories = [
   },
   {
     category: "データベース",
-    color: "border-purple-500",
     technologies: [
       { name: "PostgreSQL", level: "中級" },
       { name: "Firestore", level: "中級" },
@@ -44,8 +34,6 @@ const techCategories = [
   },
   {
     category: "DevOps & クラウド",
-    description: "インフラストラクチャとデプロイメント",
-    color: "border-orange-500",
     technologies: [
       { name: "AWS", level: "初級" },
       { name: "Vercel", level: "中級" },
@@ -55,7 +43,6 @@ const techCategories = [
   },
   {
     category: "言語",
-    color: "border-orange-500",
     technologies: [
       { name: "C", level: "初級" },
       { name: "C#", level: "中級" },
@@ -66,7 +53,6 @@ const techCategories = [
   },
   {
     category: "ツール & その他",
-    color: "border-slate-500",
     technologies: [
       { name: "VS Code", level: "中級" },
       { name: "Figma", level: "初級" },
@@ -76,66 +62,77 @@ const techCategories = [
   },
 ];
 
-const getLevelColor = (level: string) => {
-  switch (level) {
-    case "エキスパート":
-      return "bg-green-100 text-green-800 border-green-300";
-    case "上級":
-      return "bg-blue-100 text-blue-800 border-blue-300";
-    case "中級":
-      return "bg-yellow-100 text-yellow-800 border-yellow-300";
-    default:
-      return "bg-slate-100 text-slate-800 border-slate-300";
-  }
-};
+const levelRank: Record<Level, number> = { 初級: 1, 中級: 2, 上級: 3 };
+
+// ●の数でレベルを表す（色だけに頼らない）
+function LevelDots({ level }: { level: Level }) {
+  return (
+    <span className="flex gap-[3px]" aria-hidden="true">
+      {[1, 2, 3].map((n) => (
+        <span
+          key={n}
+          className={`h-2.5 w-2.5 rounded-full border-2 border-ink ${
+            n <= levelRank[level] ? "bg-ink" : "bg-white"
+          }`}
+        />
+      ))}
+    </span>
+  );
+}
 
 export function TechStack() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex min-h-screen flex-col">
       <Header />
-      <section className="flex-1 py-20 bg-gradient-to-br from-slate-50 to-slate-100">
-        <div className="max-w-6xl mx-auto px-6">
-          <h1 className="text-center mb-4 text-slate-900">技術スタック</h1>
-          <p className="text-center text-slate-600 mb-12 max-w-2xl mx-auto">
-            これまでに習得した技術とスキルレベルをカテゴリー別にご紹介します
-          </p>
-
-          <div className="space-y-8">
-            {techCategories.map((category, index) => (
-              <Card
-                key={index}
-                className={`border-l-4 ${category.color} bg-white`}
-              >
-                <CardHeader>
-                  <CardTitle className="text-slate-900">
-                    {category.category}
-                  </CardTitle>
-                  <CardDescription>{category.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-                    {category.technologies.map((tech, techIndex) => (
-                      <div
-                        key={techIndex}
-                        className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors"
-                      >
-                        <span className="text-slate-900">{tech.name}</span>
-                        <Badge
-                          variant="outline"
-                          className={`ml-2 ${getLevelColor(tech.level)}`}
-                        >
-                          {tech.level}
-                        </Badge>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+      <section className="mx-auto w-full max-w-[1120px] flex-1 px-6 pt-18 pb-28">
+        <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
+          <div className="flex flex-col gap-3">
+            <h1 className="text-4xl leading-tight sm:text-[52px]">技術スタック</h1>
+            <p className="text-[17px] leading-[1.8]">
+              これまでに習得した技術とスキルレベルをカテゴリー別にご紹介します
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-4 rounded-[14px] border-2 border-ink bg-white px-4.5 py-3 text-[13px] font-bold">
+            {(["初級", "中級", "上級"] as Level[]).map((level) => (
+              <span key={level} className="flex items-center gap-1.5">
+                <LevelDots level={level} />
+                {level}
+              </span>
             ))}
           </div>
         </div>
+
+        <div className="grid gap-7 md:grid-cols-2 lg:grid-cols-3">
+          {techCategories.map((category, index) => (
+            <div
+              key={category.category}
+              className="overflow-hidden rounded-[20px] border-2 border-ink bg-white shadow-hard-lg"
+            >
+              <h2
+                className={`border-b-2 border-ink px-5.5 py-4.5 text-xl ${
+                  index % 2 === 0 ? "bg-accent" : "bg-butter"
+                }`}
+              >
+                {category.category}
+              </h2>
+              <ul className="flex flex-col px-5.5 pt-2 pb-3.5">
+                {category.technologies.map((tech) => (
+                  <li
+                    key={tech.name}
+                    className="flex items-center justify-between gap-3 border-b border-dashed border-dash py-3 last:border-b-0"
+                  >
+                    <span className="font-bold">{tech.name}</span>
+                    <span className="flex items-center gap-2 text-[13px] font-bold">
+                      <LevelDots level={tech.level} />
+                      <span className="w-7">{tech.level}</span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
       </section>
-      <Footer />
     </div>
   );
 }

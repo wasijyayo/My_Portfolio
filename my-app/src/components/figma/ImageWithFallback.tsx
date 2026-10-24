@@ -11,8 +11,8 @@ export function ImageWithFallback({ src, alt, className = "" }: ImageWithFallbac
 
   if (error || !src) {
     return (
-      <div className={`bg-slate-200 flex items-center justify-center ${className}`}>
-        <span className="text-slate-400 text-sm">画像なし</span>
+      <div className={`bg-butter flex items-center justify-center ${className}`}>
+        <span className="text-sm font-bold">画像なし</span>
       </div>
     );
   }

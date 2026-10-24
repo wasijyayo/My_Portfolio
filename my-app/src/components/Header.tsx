@@ -1,49 +1,50 @@
 import { Link, useLocation } from "react-router-dom";
-import { Button } from "./ui/button";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import wasiIcon from "../assets/wasi.jpg";
 
 const navItems = [
   { name: "ホーム", path: "/" },
   { name: "プロジェクト", path: "/projects" },
   { name: "技術スタック", path: "/tech-stack" },
-{ name: "経歴", path: "/career" },
+  { name: "経歴", path: "/career" },
 ];
+
+const pillClass = (isActive: boolean) =>
+  `rounded-full border-2 px-4 py-2.5 font-display text-sm font-bold transition-colors ${
+    isActive ? "border-ink bg-accent" : "border-transparent hover:border-ink"
+  }`;
 
 export function Header() {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
-      <div className="max-w-6xl mx-auto px-6 py-4">
-        <div className="flex items-center justify-between">
+    <header className="sticky top-0 z-50 border-b-2 border-ink bg-white">
+      <div className="mx-auto max-w-[1120px] px-6 py-3.5">
+        <div className="flex items-center justify-between gap-3">
           {/* ロゴ */}
-          <Link to="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold">
-              わし
-            </div>
-            <span className="font-bold text-slate-900 text-lg hidden sm:block">
-              わしじゃよ_portfolio
-            </span>
+          <Link to="/" className="flex items-center gap-2.5 font-display text-xl font-extrabold">
+            <img
+              src={wasiIcon}
+              alt=""
+              className="h-10 w-10 rounded-full border-2 border-ink object-cover"
+            />
+            <span className="hidden sm:block">わしじゃよ_portfolio</span>
           </Link>
 
           {/* デスクトップナビゲーション */}
-          <nav className="hidden md:flex items-center gap-1">
+          <nav className="hidden items-center gap-2 md:flex">
             {navItems.map((item) => {
               const isActive = location.pathname === item.path;
               return (
-                <Link key={item.path} to={item.path}>
-                  <Button
-                    variant={isActive ? "default" : "ghost"}
-                    className={
-                      isActive
-                        ? "bg-blue-600 hover:bg-blue-700"
-                        : "text-slate-600 hover:text-slate-900"
-                    }
-                  >
-                    {item.name}
-                  </Button>
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className={pillClass(isActive)}
+                  aria-current={isActive ? "page" : undefined}
+                >
+                  {item.name}
                 </Link>
               );
             })}
@@ -51,21 +52,18 @@ export function Header() {
 
           {/* モバイルメニューボタン */}
           <button
-            className="md:hidden p-2 text-slate-600 hover:text-slate-900"
+            className="rounded-xl border-2 border-ink p-2 md:hidden"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
+            aria-label="メニューを開閉"
+            aria-expanded={mobileMenuOpen}
           >
-            {mobileMenuOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <Menu className="w-6 h-6" />
-            )}
+            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
 
         {/* モバイルナビゲーション */}
         {mobileMenuOpen && (
-          <nav className="md:hidden mt-4 pb-4 flex flex-col gap-2">
+          <nav className="mt-4 flex flex-col gap-2 pb-2 md:hidden">
             {navItems.map((item) => {
               const isActive = location.pathname === item.path;
               return (
@@ -73,17 +71,10 @@ export function Header() {
                   key={item.path}
                   to={item.path}
                   onClick={() => setMobileMenuOpen(false)}
+                  className={pillClass(isActive)}
+                  aria-current={isActive ? "page" : undefined}
                 >
-                  <Button
-                    variant={isActive ? "default" : "ghost"}
-                    className={`w-full justify-start ${
-                      isActive
-                        ? "bg-blue-600 hover:bg-blue-700"
-                        : "text-slate-600 hover:text-slate-900"
-                    }`}
-                  >
-                    {item.name}
-                  </Button>
+                  {item.name}
                 </Link>
               );
             })}

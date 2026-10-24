@@ -1,4 +1,3 @@
-import { FolderGit2, Calendar, Code2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
@@ -16,76 +15,43 @@ export function Stats() {
 
   const stats = [
     {
-      icon: FolderGit2,
       title: "プロジェクト数",
       value: projectCount !== null ? `${projectCount}` : "...",
-      color: "text-blue-600",
-      bgColor: "bg-blue-100",
       link: "/projects",
     },
     {
-      icon: Calendar,
       title: "開発期間",
-      value: "4年",
-      color: "text-green-600",
-      bgColor: "bg-green-100",
+      value: "4",
+      unit: "年",
       link: "/career",
     },
     {
-      icon: Code2,
       title: "技術スタック",
       value: "22+",
-      color: "text-orange-600",
-      bgColor: "bg-orange-100",
       link: "/tech-stack",
     },
   ];
 
   return (
-    <section id="stats" className="py-20 bg-slate-50">
-      <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-center mb-12 text-slate-900">実績</h2>
-        <div className="grid md:grid-cols-3 gap-8">
-          {stats.map((stat, index) => {
-            const Icon = stat.icon;
-            const content = (
-              <>
-                <div
-                  className={`w-16 h-16 mx-auto mb-4 rounded-full ${stat.bgColor} flex items-center justify-center`}
-                >
-                  <Icon className={`w-8 h-8 ${stat.color}`} />
-                </div>
-                <div className="text-4xl font-bold text-slate-900 mb-2">
-                  {stat.value}
-                </div>
-                <div className="text-slate-600">{stat.title}</div>
-              </>
-            );
-
-            if (stat.link) {
-              return (
-                <Link
-                  key={index}
-                  to={stat.link}
-                  className="text-center p-8 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:scale-105 cursor-pointer"
-                >
-                  {content}
-                </Link>
-              );
-            }
-
-            return (
-              <div
-                key={index}
-                className="text-center p-8 bg-white rounded-lg shadow-sm"
-              >
-                {content}
-              </div>
-            );
-          })}
-        </div>
+    <section id="stats" className="mx-auto w-full max-w-[1120px] px-6 pb-24">
+      <h2 className="mb-9 text-4xl sm:text-[40px]">実績</h2>
+      <div className="grid gap-5 sm:grid-cols-3">
+        {stats.map((stat) => (
+          <Link
+            key={stat.title}
+            to={stat.link}
+            className="flex flex-col gap-1 rounded-[20px] border-2 border-ink bg-white p-7 shadow-hard transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5"
+          >
+            <span className="font-display text-[52px] leading-tight font-extrabold">
+              {stat.value}
+              {stat.unit && <span className="text-[26px]">{stat.unit}</span>}
+            </span>
+            <span className="text-[15px] font-bold">{stat.title}</span>
+          </Link>
+        ))}
       </div>
     </section>
   );
 }
+
 export default Stats;

@@ -1,25 +1,20 @@
-import { Github, ExternalLink } from "lucide-react";
-import { Button } from "../components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "../components/ui/card";
-import { Badge } from "../components/ui/badge";
-import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
-import { ImageWithFallback } from "../components/figma/ImageWithFallback";
-import { useEffect, useState } from "react";
+import { ProjectCard } from "../components/ProjectCard";
+import type { Project } from "../components/ProjectCard";
+import { useEffect, useMemo, useState } from "react";
+
+const ALL = "すべて";
 
 export function AllProjects() {
-  const [projects, setProjects] = useState<any[]>([]);
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [picked, setPicked] = useState(ALL);
+
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetch("/api/events");
       const data = await res.json();
       const formatted = data.map((item: any) => ({
+        id: item.id,
         title: item.properties.タイトル.title[0]?.plain_text,
         date: item.properties.日付.date?.start,
         description:
@@ -27,88 +22,62 @@ export function AllProjects() {
         tags: item.properties.タグ.multi_select.map((tag: any) => tag.name),
         image: item.properties["ファイル&メディア"].url,
         github: item.properties.github.url,
-        Report: item.properties.記事.url,
+        report: item.properties.記事.url,
       }));
       setProjects(formatted);
     };
     fetchData();
   }, []);
-  return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
-      <section className="flex-1 py-20 bg-gradient-to-br from-slate-50 to-slate-100">
-        <div className="max-w-6xl mx-auto px-6">
-          <h1 className="text-center mb-4 text-slate-900">
-            すべてのプロジェクト
-          </h1>
-          <p className="text-center text-slate-600 mb-12 max-w-2xl mx-auto">
-            これまでに手がけたすべてのプロジェクトをご覧いただけます
-          </p>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, index) => (
-              <Card
-                key={index}
-                className="overflow-hidden hover:shadow-xl transition-shadow bg-white"
+  // 全プロジェクトのタグを重複なしで集める
+  const tags = useMemo(
+    () => [ALL, ...new Set(projects.flatMap((p) => p.tags ?? []))],
+    [projects],
+  );
+
+  const visible =
+    picked === ALL ? projects : projects.filter((p) => p.tags?.includes(picked));
+
+  return (
+    <div className="flex min-h-screen flex-col">
+      <Header />
+      <section className="mx-auto w-full max-w-[1120px] flex-1 px-6 pt-18 pb-28">
+        <div className="mb-8 flex flex-wrap items-end justify-between gap-6">
+          <div className="flex flex-col gap-3">
+            <h1 className="text-4xl leading-tight sm:text-[52px]">すべてのプロジェクト</h1>
+            <p className="text-[17px] leading-[1.8]">
+              これまでに手がけたすべてのプロジェクトをご覧いただけます
+            </p>
+          </div>
+          <span className="rounded-full border-2 border-ink bg-white px-4 py-2 font-display text-[15px] font-extrabold">
+            全 {projects.length} 件
+          </span>
+        </div>
+
+        {projects.length > 0 && (
+          <div className="mb-10 flex flex-wrap gap-2">
+            {tags.map((tag) => (
+              <button
+                key={tag}
+                type="button"
+                onClick={() => setPicked(tag)}
+                aria-pressed={picked === tag}
+                className={`min-h-11 cursor-pointer rounded-full border-2 border-ink px-4.5 font-display text-sm font-bold ${
+                  picked === tag ? "bg-accent" : "bg-white hover:bg-butter"
+                }`}
               >
-                <ImageWithFallback
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-48 object-cover"
-                />
-                <CardHeader>
-                  <div className="mb-2">
-                    <Badge variant="outline">{project.date}</Badge>
-                  </div>
-                  <CardTitle className="text-slate-900">
-                    {project.title}
-                  </CardTitle>
-                  <CardDescription>{project.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tags?.map((tag: string, tagIndex: number) => (
-                      <Badge key={tagIndex} variant="secondary">
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
-                  <div className="flex gap-2">
-                    {project.github && (
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <Button variant="outline" size="sm" className="w-full">
-                          <Github className="w-4 h-4 mr-2" />
-                          Code
-                        </Button>
-                      </a>
-                    )}
-                    {project.Report && (
-                      <a
-                        href={project.Report}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <Button
-                          size="sm"
-                          className="flex-1 bg-blue-600 hover:bg-blue-700"
-                        >
-                          <ExternalLink className="w-4 h-4 mr-2" />
-                          記事
-                        </Button>
-                      </a>
-                    )}
-                  </div>
-                </CardContent>
-              </Card>
+                {tag}
+              </button>
             ))}
           </div>
+        )}
+
+        <div className="grid gap-7 md:grid-cols-2 lg:grid-cols-3">
+          {visible.map((project) => (
+            <ProjectCard key={project.id} project={project} />
+          ))}
         </div>
       </section>
-      <Footer />
     </div>
   );
 }
