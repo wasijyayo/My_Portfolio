@@ -1,4 +1,3 @@
-import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 
 const timelineItems = [
@@ -38,8 +37,8 @@ const timelineItems = [
 
 const summary = [
   { value: "4年+", label: "プログラミング歴" },
-  { value: "5+", label: "ハッカソン参加" },
-  { value: "11+", label: "つくったもの" },
+  { value: "5+", label: "ハッカソン参加回数" },
+  { value: "11+", label: "成果物数" },
 ];
 
 export function Career() {
@@ -48,9 +47,9 @@ export function Career() {
       <Header />
       <section className="mx-auto w-full max-w-[880px] flex-1 px-6 pt-18 pb-28">
         <div className="mb-10 flex flex-col gap-3">
-          <h1 className="text-4xl leading-tight sm:text-[52px]">わしの歩み</h1>
+          <h1 className="text-4xl leading-tight sm:text-[52px]">経歴</h1>
           <p className="text-[17px] leading-[1.8]">
-            高校でPythonを書きはじめてから、いまに至るまで。
+            これまでの職歴と学歴をタイムライン形式でご紹介します
           </p>
         </div>
 
@@ -104,7 +103,6 @@ export function Career() {
           })}
         </ol>
       </section>
-      <Footer />
     </div>
   );
 }

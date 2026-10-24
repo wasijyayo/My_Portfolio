@@ -30,7 +30,7 @@ export function Header() {
               alt=""
               className="h-10 w-10 rounded-full border-2 border-ink object-cover"
             />
-            わしじゃよ
+            <span className="hidden sm:block">わしじゃよ_portfolio</span>
           </Link>
 
           {/* デスクトップナビゲーション */}

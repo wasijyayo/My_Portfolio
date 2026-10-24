@@ -1,4 +1,3 @@
-import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 import { ProjectCard } from "../components/ProjectCard";
 import type { Project } from "../components/ProjectCard";
@@ -45,13 +44,13 @@ export function AllProjects() {
       <section className="mx-auto w-full max-w-[1120px] flex-1 px-6 pt-18 pb-28">
         <div className="mb-8 flex flex-wrap items-end justify-between gap-6">
           <div className="flex flex-col gap-3">
-            <h1 className="text-4xl leading-tight sm:text-[52px]">つくったもの</h1>
+            <h1 className="text-4xl leading-tight sm:text-[52px]">すべてのプロジェクト</h1>
             <p className="text-[17px] leading-[1.8]">
-              ハッカソンや個人開発でつくってきたものたち。
+              これまでに手がけたすべてのプロジェクトをご覧いただけます
             </p>
           </div>
           <span className="rounded-full border-2 border-ink bg-white px-4 py-2 font-display text-[15px] font-extrabold">
-            ぜんぶで {projects.length} 件
+            全 {projects.length} 件
           </span>
         </div>
 
@@ -79,7 +78,6 @@ export function AllProjects() {
           ))}
         </div>
       </section>
-      <Footer />
     </div>
   );
 }
